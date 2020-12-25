@@ -11,36 +11,26 @@ Current bid :
 </div>
 
 <div class="d-flex card-body text-center mx-auto">
-<span th:each="field :${fields}" th:class="${field.getHTMLclass()}"  th:text="${field.getNumber()}"></span>
+<span th:object="${crash}" th:text="${crash.getMultipiler()}"></span>
 </div>
 <div class="d-flex form-group mx-sm-3 mb-2 text-light mx-auto">
 </div>
 </div>
 
-<form th:action="@{/roulette}" th:method="post" th:object="${bidForm}" class="form-inline">
+<form th:action="@{/crash}" th:method="post" th:object="${bidForm}" class="form-inline">
 <div class="d-flex w-50 p-3 card border-danger bg-dark mx-auto border-top-0 text-center">
 <div class="d-flex card-header text-center bg-dark border-0 mx-sm-3">
-
-
-<div class="btn-group-toggle d-flex mx-auto" data-toggle="buttons">
-  <label class="d-flex btn btn-danger w-25 mr-5 ml-5">
-    <input type="radio" name="type" autocomplete="off" value="RED"> RED
-  </label>
-  <label class="btn btn-success w-25 mr-5">
-    <input type="radio" name="type" autocomplete="off" value="GREEN"> GREEN
-  </label>
-  <label class=" d-flex btn btn-secondary w-25 mr-5">
-    <input type="radio" name="type" autocomplete="off" value = "BLACK"> BLACK
-  </label>
 </div>
-
-</div>
-
 
 <div class="d-flex card-body text-center mx-auto">
  <div class="form-group mx-sm-3 mb-2 text-light">
-    <label for="inputBid" class="sr-only text-light">Place a bid</label>
+ 
+    <label for="inputBid" class="sr-only text-light">Amount</label>
     <input th:field="${bidForm.amount}" type="text" class="form-control border-danger bg-dark text-light" id="inputBid" placeholder="Amount">
+    
+        <label for="inputMultipiler" class="sr-only text-light">Amount</label>
+    <input th:field="${bidForm.multipiler}" type="text" class="form-control border-danger bg-dark text-light" id="inputMultipiler" placeholder="Multipiler">
+    
     
      <!--  
     <button class="btn text-light  bg-dark border-danger ml-5">2x</button>
@@ -64,7 +54,7 @@ Current bid :
     <tr>
       <th scope="col">Id</th>
       <th scope="col">Amount</th>
-      <th scope="col">Color</th>
+      <th scope="col">Multipiler</th>
       <th scope="col">Balance</th>
     </tr>
   </thead>
@@ -73,7 +63,7 @@ Current bid :
     <tr>
       <th scope="row" th:text="${bid.getId()}"></th>
       <td th:text="${bid.getAmount()}"></td>
-      <td th:text="${bid.getType()}" th:class=${bid.getHclass()}></td>
+        <td th:text="${bid.getMultipiler()}"></td>
       <td th:text="${bid.getSbalance()}" th:class="${bid.getBalClass()}"></td>
     </tr>
     

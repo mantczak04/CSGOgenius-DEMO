@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<header th:replace="fragments/header :: header"></header>
+<body class="bg-dark">
+
+<!--  
+<div class="d-flex w-50 p-3 card border-danger bg-dark mx-auto">
+
+<div th:each="team : ${teams}"class="card border-danger bg-dark text-light mb-3" style="width: 18rem;">
+<div class="row">
+
+<img class="card-img-top" src="">
+<div class="card body bg-dark">
+<h5 class="card-title text-center" th:text="${team.getName()}"></h5>
+</div>
+</div>
+</div>
+</div>-->
+<form th:action="@{/matchbetting}" th:method="post" th:object="${bidForm}"> 
+<div class="d-flex w-50 p-3 card border-danger bg-dark mx-auto">
+	<div class="card-header text-light text-center mb-3">Current bid : 
+	<p class="card-text" th:object="${currentBid}" th:text="${bidForm.getAmount()}"></p>
+	</div>
+	
+	
+	<div class="form-group mx-sm-3 mb-2 text-light text-center">
+    <label for="inputBid" class="sr-only text-light">Place a bid</label>
+    <input th:field="${bidForm.amount}" type="text" class="form-control border-danger bg-dark text-light w-25 mx-auto" id="inputBid" placeholder="Amount">
+</div>
+</div>
+
+<div class="d-flex w-50 p-3 card border-danger bg-dark mx-auto">
+<div  class="row border-danger bg-dark">
+  <div th:each="team : ${teams}" class="col-sm-6 mb-3">
+  
+    <div class="d-flex card w-75 text-center text-light border-danger bg-dark mx-auto">
+      <div class="card-body">
+      <img style="width: 30px; height: 30px;" th:src="${team.getSrc()}">
+        <h5 class="card-title" th:text="${team.getName()}"></h5>
+        <p class="card-text" th:text="${team.getMultipiler()}"></p>
+        
+    	<button class="button btn-danger border-danger" type="submit" name="which" th:value="${team.getWhich()}">BET</button>
+        
+        
+        
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+</form>
+
+<div class="d-flex w-50 p-3 card border-danger bg-dark text-light mx-auto mt-5">
+<table class="table table-striped text-white border-danger">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Team</th>
+      <th scope="col">Multipiler</th>
+      <th scope="col">Balance</th>
+    </tr>
+  </thead>
+  
+  <tbody th:each="bid :${bids}">
+    <tr>
+      <th scope="row" th:text="${bid.getId()}"></th>
+      <td th:text="${bid.getAmount()}"></td>
+     <td th:text="${bid.getType()}"></td>
+     <td th:text="${bid.getMultipiler()}"></td>
+     <td th:class="${bid.getBalClass()}" th:text="${bid.getSbalance()}"></td>
+    </tr>
+    
+  </tbody>
+</table>
+</div>
+
+</body>
+</html>
