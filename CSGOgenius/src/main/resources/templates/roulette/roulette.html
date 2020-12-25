@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<header th:replace="fragments/header :: header"></header>
+<body class="bg-dark">
+
+<div class="card border-danger bg-dark text-light">
+<div class="card-header text-light text-center">
+Roulette
+</div>
+<div class="card-body text-center">
+<span th:each="field :${fields}" th:class="${field.getHTMLclass()}"  th:text="${field.getNumber()}"></span>
+</div>
+<a class="btn btn-primary bg-danger border-danger" href="/roulette">Spin it!</a>
+</div>
+</body>
+</html>
